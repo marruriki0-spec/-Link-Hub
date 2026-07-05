@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <meta name="description" content="SIMON STORE - Official Link Hub, premium services and downloads">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="color-scheme" content="dark">
+  <title>SIMON STORE | Official Links</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --bg-deep: #03030a;
+      --bg-primary: #0a0a14;
+      --bg-card: rgba(10, 10, 20, 0.45);
+      --glass-border: rgba(160, 120, 255, 0.25);
+      --text-primary: #f0eaff;
+      --text-secondary: #c0b8d8;
+      --shadow-glow: 0 0 35px rgba(160, 100, 255, 0.4);
+      --transition-smooth: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      --border-radius-card: 24px;
+      --blur-intensity: 25px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-deep);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text-primary);
+    }
+
+    .background-layer {
+      position: fixed; inset: 0; z-index: -2;
+      background: radial-gradient(ellipse at 30% 20%, #1a102f 0%, #03010a 60%);
+      overflow: hidden;
+    }
+
+    .aurora {
+      position: absolute;
+      width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
+      background: radial-gradient(circle at 30% 30%, rgba(120, 50, 255, 0.25) 0%, rgba(20, 20, 80, 0) 70%);
+      filter: blur(80px); border-radius: 50%;
+      animation: floatAurora 18s infinite alternate ease-in-out;
+      opacity: 0.8; mix-blend-mode: screen;
+    }
+    .aurora.second {
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle at 70% 60%, rgba(0, 180, 255, 0.3) 0%, rgba(0, 40, 80, 0) 70%);
+      right: 5%; bottom: 5%;
+      animation-duration: 22s; animation-direction: alternate-reverse;
+      filter: blur(90px);
+    }
+    .aurora.third {
+      width: 50vw; height: 50vw;
+      background: radial-gradient(circle at 50% 50%, rgba(200, 80, 200, 0.2) 0%, transparent 70%);
+      left: 20%; bottom: 10%;
+      animation-duration: 25s; filter: blur(70px);
+    }
+
+    @keyframes floatAurora {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-5%, 8%) scale(1.2); }
+    }
+
+    #particle-canvas {
+      position: fixed; inset: 0; z-index: -1;
+      pointer-events: none; opacity: 0.7;
+    }
+
+    .mouse-glow {
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(140, 80, 255, 0.25) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
+      transform: translate(-50%, -50%); z-index: -1;
+      filter: blur(50px); transition: opacity 0.2s;
+    }
+
+    .main-container {
+      width: 100%; max-width: 520px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      animation: fadeScaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeScaleIn {
+      0% { opacity: 0; transform: scale(0.94); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(var(--blur-intensity));
+      -webkit-backdrop-filter: blur(var(--blur-intensity));
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-card);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.7), var(--shadow-glow), inset 0 0 20px rgba(255,255,255,0.03);
+      padding: 2.5rem 1.8rem 2.2rem; width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      transition: box-shadow 0.4s ease, transform 0.2s ease;
+      animation: floatCard 7s infinite alternate ease-in-out;
+      position: relative; overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px);
+      pointer-events: none; z-index: 1; border-radius: var(--border-radius-card);
+    }
+
+    .glass-card::after {
+      content: ''; position: absolute; inset: -2px;
+      border-radius: calc(var(--border-radius-card) + 2px); padding: 2px;
+      background: linear-gradient(45deg, #b980f0, #5b8cff, #2ef0f0, #f062c0, #1877f2, #b980f0);
+      background-size: 400% 400%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: borderGlow 4s ease infinite;
+      z-index: 0; opacity: 0.6;
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 35px 60px rgba(0,0,0,0.8), 0 0 55px rgba(170,100,255,0.55), inset 0 0 25px rgba(255,255,255,0.05);
+    }
+
+    /* โลโก้ */
+    .logo-wrapper {
+      margin-bottom: 1.5rem; position: relative;
+      display: flex; align-items: center; justify-content: center; z-index: 2;
+    }
+    .logo-wrapper::before {
+      content: ''; position: absolute; width: 120px; height: 120px;
+      border-radius: 50%; border: 2px dashed rgba(180,130,255,0.4);
+      animation: spin 10s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .logo-circle {
+      width: 100px; height: 100px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #2d1b4e, #0b041a);
+      box-shadow: 0 0 40px rgba(160,80,255,0.7), 0 0 10px rgba(255,255,255,0.4);
+      border: 3px solid rgba(210,180,255,0.7);
+      animation: gentleGlow 3s infinite alternate;
+      position: relative; z-index: 2; overflow: hidden; padding: 5px;
+      transition: all 0.4s ease;
+    }
+    .logo-image {
+      width: 100%; height: 100%; border-radius: 50%;
+      object-fit: cover; display: block;
+      filter: brightness(1.1) contrast(1.1);
+      transition: transform 0.4s ease;
+    }
+    .logo-circle:hover .logo-image { transform: scale(1.1); }
+
+    @keyframes gentleGlow {
+      0% { box-shadow: 0 0 35px rgba(150,70,255,0.65), 0 0 10px white; }
+      100% { box-shadow: 0 0 55px rgba(180,100,255,0.9), 0 0 25px rgba(255,255,255,0.6); }
+    }
+
+    .store-title {
+      font-size: 2.1rem; font-weight: 700; letter-spacing: 1.5px;
+      background: linear-gradient(to right, #e9d5ff, #b7a9ff, #a5c9ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 0.3rem;
+      text-shadow: 0 0 15px #6d28d9; position: relative; z-index: 2;
+    }
+
+    .status-indicator {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem; font-size: 0.8rem; color: #a78bfa; z-index: 2;
+    }
+    .status-dot {
+      width: 8px; height: 8px; background: #4ade80; border-radius: 50%;
+      animation: pulse 2s infinite; box-shadow: 0 0 10px #4ade80;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .official-tag {
+      font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px;
+      color: #b7adcf; margin-bottom: 1.5rem; font-weight: 400;
+      border-bottom: 1px solid rgba(170,140,255,0.4);
+      padding-bottom: 0.8rem; width: fit-content; z-index: 2;
+    }
+
+    .stats-mini {
+      display: flex; gap: 1.5rem; margin-bottom: 1.8rem;
+      font-size: 0.75rem; color: #9b8ec4; z-index: 2;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .stat-item { display: flex; align-items: center; gap: 0.3rem; }
+    .stat-item i { color: #c4b5fd; font-size: 0.8rem; }
+
+    .section-label {
+      font-size: 0.95rem; color: #aca3c7; margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      width: 100%; font-weight: 400; z-index: 2;
+    }
+    .section-label i { color: #bf9eff; font-size: 0.9rem; }
+
+    /* ปุ่ม */
+    .button-group {
+      width: 100%; display: flex; flex-direction: column;
+      gap: 1rem; margin-bottom: 1.8rem; z-index: 2;
+    }
+
+    .premium-btn {
+      display: flex; align-items: center; width: 100%;
+      background: rgba(20,15,35,0.55); backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(200,170,255,0.3); border-radius: 20px;
+      padding: 1rem 1.3rem; color: #fff; text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: var(--transition-smooth);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+      cursor: pointer; gap: 1rem; transform: translateY(0);
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.2s;
+    }
+
+    .premium-btn::before {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+    .premium-btn:hover::before { left: 100%; }
+
+    .premium-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 30px rgba(100,40,200,0.4), 0 0 25px var(--hover-glow);
+      border-color: rgba(230,200,255,0.7);
+    }
+
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transform: scale(0); animation: rippleEffect 0.7s ease-out;
+      pointer-events: none;
+    }
+    @keyframes rippleEffect {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .btn-icon {
+      width: 2.8rem; height: 2.8rem; text-align: center;
+      position: relative; z-index: 1; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .btn-icon i {
+      font-size: 1.8rem; color: #e2d7ff;
+      filter: drop-shadow(0 0 8px currentColor);
+      transition: transform 0.3s ease;
+    }
+    .premium-btn:hover .btn-icon i { transform: scale(1.15); }
+
+    /* === ไอคอนดาวน์โหลด Animation — สีแดงแท้ === */
+    .download-animated {
+      position: relative;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .download-circle-bg {
+      position: absolute;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #dc143c, #8b0000);
+      box-shadow: 0 0 18px rgba(220,20,60,0.5), inset 0 -2px 4px rgba(0,0,0,0.3);
+      animation: downloadBreathe 2.5s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+    .download-arrow-anim {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      animation: downloadFloat 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+      transition: all 0.3s ease;
+    }
+    .premium-btn:hover .download-circle-bg {
+      animation-duration: 1.2s;
+      box-shadow: 0 0 35px rgba(220,20,60,0.8);
+    }
+    .premium-btn:hover .download-arrow-anim {
+      animation-duration: 1.2s;
+    }
+
+    @keyframes downloadBreathe {
+      0%, 100% { box-shadow: 0 0 18px rgba(220,20,60,0.5); transform: scale(1); }
+      50% { box-shadow: 0 0 35px rgba(255,0,0,0.7); transform: scale(1.06); }
+    }
+
+    @keyframes downloadFloat {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50% { transform: translateY(3px); opacity: 1; }
+    }
+
+    /* รูปภาพไอคอน */
+    .btn-icon-image {
+      width: 100%; height: 100%; object-fit: contain;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 8px rgba(192,132,252,0.6));
+      transition: transform 0.3s ease;
+    }
+    .premium-btn:hover .btn-icon-image {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .btn-content {
+      display: flex; flex-direction: column;
+      text-align: left; flex: 1; position: relative; z-index: 1;
+    }
+    .btn-title {
+      font-weight: 650; font-size: 1.1rem; letter-spacing: 0.3px;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-desc {
+      font-size: 0.8rem; color: #bfb2e0;
+      margin-top: 0.15rem; opacity: 0.9;
+    }
+
+    .badge-premium {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #000; font-size: 0.65rem; padding: 0.2rem 0.5rem;
+      border-radius: 12px; font-weight: 700; letter-spacing: 0.5px;
+    }
+    .badge-new {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: #000; font-size: 0.65rem; padding: 0.2rem 0.5rem;
+      border-radius: 12px; font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    .btn-arrow {
+      color: rgba(255,255,255,0.5); font-size: 1rem;
+      transition: transform 0.2s; position: relative; z-index: 1;
+    }
+    .premium-btn:hover .btn-arrow { transform: translateX(4px); color: white; }
+
+    .btn-download { --hover-glow: #dc143c; border-left: 4px solid #dc143c; }
+    .btn-vip { --hover-glow: #a855f7; border-left: 4px solid #c084fc; }
+    .btn-tiktok { --hover-glow: #f062c0; border-left: 4px solid #f062c0; }
+    .btn-tiktok .btn-icon i { color: #f5c0e0; }
+    .btn-facebook { --hover-glow: #1877f2; border-left: 4px solid #1877f2; }
+    .btn-facebook .btn-icon i { color: #1877f2; }
+
+    .footer-text {
+      margin-top: 1rem; font-size: 0.8rem; color: #6b6380;
+      text-align: center; letter-spacing: 0.5px; z-index: 2;
+    }
+
+    .trust-badges {
+      display: flex; gap: 1rem; margin-top: 1rem;
+      font-size: 0.7rem; color: #6b6380; z-index: 2;
+      align-items: center; flex-wrap: wrap; justify-content: center;
+    }
+    .trust-badges i { color: #a78bfa; margin-right: 0.2rem; }
+
+    .logo-fallback, .icon-fallback {
+      display: none; font-size: 1.8rem; color: #e2d7ff;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    .logo-image.error+.logo-fallback,
+    .btn-icon-image.error+.icon-fallback { display: block; }
+
+    @media (max-width: 500px) {
+      .glass-card { padding: 2rem 1.2rem 1.8rem; }
+      .store-title { font-size: 1.8rem; }
+      .premium-btn { padding: 0.9rem 1rem; }
+      .stats-mini { gap: 1rem; font-size: 0.7rem; }
+      .logo-circle { width: 90px; height: 90px; }
+      .logo-wrapper::before { width: 110px; height: 110px; }
+      .btn-icon { width: 2.4rem; height: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-layer">
+    <div class="aurora"></div>
+    <div class="aurora second"></div>
+    <div class="aurora third"></div>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+  <main class="main-container">
+    <div class="glass-card" id="glassCard">
+
+      <div class="logo-wrapper">
+        <div class="logo-circle">
+          <img src="https://img2.pic.in.th/55_20241216095904c69af7805ce9d90a.png" alt="SIMON STORE Logo"
+            class="logo-image" loading="eager"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            onload="this.style.opacity='1';">
+          <span class="logo-fallback" style="display: none;">SS</span>
+        </div>
+      </div>
+
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>ออนไลน์ • พร้อมให้บริการ</span>
+      </div>
+
+      <h1 class="store-title">SIMON STORE</h1>
+      <p class="official-tag">Official Links</p>
+
+      <div class="stats-mini">
+        <div class="stat-item"><i class="fas fa-users"></i><span>10K+ สมาชิก</span></div>
+        <div class="stat-item"><i class="fas fa-star"></i><span>4.9 คะแนน</span></div>
+        <div class="stat-item"><i class="fas fa-shield-alt"></i><span>ปลอดภัย 100%</span></div>
+        <div class="stat-item"><i class="fas fa-comments"></i><span>แชทสด</span></div>
+      </div>
+
+      <div class="section-label">
+        <i class="fas fa-caret-right"></i> เลือกบริการที่ต้องการ
+      </div>
+
+      <div class="button-group">
+
+        <!-- ปุ่ม 1: ดาวน์โหลด -->
+        <a href="https://marruriki0-spec.github.io/Download/" target="_blank" rel="noopener noreferrer" class="premium-btn btn-download">
+          <span class="btn-icon">
+            <span class="download-animated">
+              <span class="download-circle-bg"></span>
+              <span class="download-arrow-anim">↓</span>
+            </span>
+          </span>
+          <div class="btn-content">
+            <span class="btn-title">ดาวน์โหลด</span>
+            <span class="btn-desc">รับไฟล์เวอร์ชันล่าสุด</span>
+          </div>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </a>
+
+        <!-- ปุ่ม 2: เว็บไซต์ VIP -->
+        <a href="https://simon.rexzy.xyz/home" target="_blank" rel="noopener noreferrer" class="premium-btn btn-vip">
+          <span class="btn-icon">
+            <img src="https://img2.pic.in.th/55_20241216095904c69af7805ce9d90a.png" alt="VIP"
+              class="btn-icon-image" loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <i class="fas fa-crown icon-fallback" style="display: none;"></i>
+          </span>
+          <div class="btn-content">
+            <span class="btn-title">เว็บไซต์ VIP <span class="badge-premium">HOT</span></span>
+            <span class="btn-desc">ไฟล์พรีเมียม • อัปเดตล่าสุด</span>
+          </div>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </a>
+
+        <!-- ปุ่ม 3: TikTok -->
+        <a href="https://www.tiktok.com/@riki74139?_r=1&_t=ZS-97mafjQDPFs" target="_blank" rel="noopener noreferrer" class="premium-btn btn-tiktok">
+          <span class="btn-icon"><i class="fab fa-tiktok"></i></span>
+          <div class="btn-content">
+            <span class="btn-title">TikTok</span>
+            <span class="btn-desc">ติดตามข่าวสารและคลิปใหม่</span>
+          </div>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </a>
+
+        <!-- ปุ่ม 4: กลุ่ม Facebook -->
+        <a href="https://www.facebook.com/share/g/1ETSFNg2W5/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="premium-btn btn-facebook">
+          <span class="btn-icon"><i class="fab fa-facebook"></i></span>
+          <div class="btn-content">
+            <span class="btn-title">กลุ่ม Facebook <span class="badge-new">ใหม่</span></span>
+            <span class="btn-desc">ซื้อขายไฟล์ • พูดคุย • แลกเปลี่ยนข้อมูล</span>
+          </div>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </a>
+
+      </div>
+
+      <footer class="footer-text">© 2026 SIMON STORE<br>All Rights Reserved</footer>
+
+      <div class="trust-badges">
+        <span><i class="fas fa-lock"></i> SSL เข้ารหัส</span>
+        <span><i class="fas fa-check-circle"></i> ยืนยันตัวตน</span>
+        <span><i class="fas fa-sync-alt"></i> อัปเดตทุกวัน</span>
+        <span><i class="fas fa-headset"></i> Support 24/7</span>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height, particles = [];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.size = Math.random() * 2.2 + 0.8;
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.speedY = (Math.random() - 0.5) * 0.4;
+          this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+            this.reset(); this.x = Math.random() * width; this.y = Math.random() * height;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(180,150,255,${this.opacity})`;
+          ctx.fill();
+          ctx.shadowColor = 'rgba(160,120,255,0.7)';
+          ctx.shadowBlur = 6;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function initParticles(count = 70) {
+        particles = [];
+        for (let i = 0; i < count; i++) particles.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animateParticles);
+      }
+
+      window.addEventListener('resize', () => { resizeCanvas(); initParticles(70); });
+      resizeCanvas(); initParticles(70); animateParticles();
+
+      const mouseGlow = document.getElementById('mouseGlow');
+      document.addEventListener('mousemove', (e) => {
+        if (!mouseGlow) return;
+        mouseGlow.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+        mouseGlow.style.opacity = '0.9';
+        const card = document.getElementById('glassCard');
+        if (card && window.innerWidth > 600) {
+          const moveX = (e.clientX / window.innerWidth - 0.5) * 8;
+          const moveY = (e.clientY / window.innerHeight - 0.5) * 8;
+          card.style.transform = `translate(${moveX}px, ${moveY - 3}px)`;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        if (mouseGlow) mouseGlow.style.opacity = '0.3';
+        const card = document.getElementById('glassCard');
+        if (card) card.style.transform = 'translateY(0)';
+      });
+
+      const buttons = document.querySelectorAll('.premium-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          ripple.classList.add('ripple');
+          const rect = btn.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = `${size}px`;
+          ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+          ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+          btn.appendChild(ripple);
+          ripple.addEventListener('animationend', () => ripple.remove());
+          btn.style.animation = 'microVibration 0.3s ease';
+          setTimeout(() => { btn.style.animation = ''; }, 300);
+        });
+
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left, y = e.clientY - rect.top;
+          const moveX = (x - rect.width/2) / 9, moveY = (y - rect.height/2) / 9;
+          btn.style.transform = `translate(${moveX}px, ${moveY - 3}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => { btn.style.transform = 'translateY(0)'; });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        const btns = document.querySelectorAll('.premium-btn');
+        if (e.key === '1') btns[0]?.click();
+        else if (e.key === '2') btns[1]?.click();
+        else if (e.key === '3') btns[2]?.click();
+        else if (e.key === '4') btns[3]?.click();
+      });
+
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes microVibration {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(-2px); }
+          50% { transform: translateX(2px); }
+          75% { transform: translateX(-1px); }
+          100% { transform: translateX(0); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      document.querySelectorAll('.logo-image, .btn-icon-image').forEach(img => {
+        const link = document.createElement('link');
+        link.rel = 'preload'; link.as = 'image'; link.href = img.src;
+        document.head.appendChild(link);
+      });
+    })();
+  </script>
+</body>
+</html>
